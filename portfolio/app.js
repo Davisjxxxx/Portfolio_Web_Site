@@ -23,6 +23,24 @@ function siteLink(url) {
   return link;
 }
 const dialog = select('#details');
+function showNovaDesign() {
+  const title=element('h2','Nova Origins design preview');
+  title.id='detail-title';
+  const image=new Image();
+  image.src='assets/nova-frontend.webp';
+  image.alt='The Nova homepage shows three illustrated investigations side by side, from early galaxies through prehistoric Earth to an ancient settlement.';
+  image.width=1440;
+  image.height=922;
+  const fullSize=element('a','Open full-size design ↗','site-link');
+  fullSize.href=image.src;
+  fullSize.target='_blank';
+  fullSize.rel='noopener noreferrer';
+  select('#detail-body').replaceChildren(title,image,element('p','The Cosmos · Earth & Life · Human Origins & Civilizations'),fullSize);
+  dialog.classList.add('design-preview');
+  dialog.showModal();
+  dialog.scrollTop=0;
+}
+dialog.addEventListener('close',()=>dialog.classList.remove('design-preview'));
 function showProject(project) {
   const title = element('h2', project.title);
   title.id = 'detail-title';
@@ -60,23 +78,39 @@ function drawCatalog(label, predicate) {
   select('#results').textContent = visible.length + ' projects shown';
   for (const project of visible) {
     const card = element('article', undefined, 'card');
-    const art = element('div', undefined, 'card-art art-' + project.id);
+    card.dataset.project = project.id;
+    const art = element('div', undefined, 'card-art');
     art.setAttribute('aria-hidden','true');
-    if (project.id === 'nova-origins') {
-      const image = new Image();
-      image.src = 'assets/nova.webp';
-      image.alt = '';
-      art.append(image);
-    } else drawPlate(art, project.id);
+    if (project.id !== 'nova-origins') drawPlate(art, project.id);
+
     const inner = element('div', undefined, 'card-inner');
-    const top = element('div', undefined, 'card-top');
-    top.append(element('span', project.status, 'status'), element('span','↗'));
     const title = element('h3');
-    const open = button(project.title, 'card-open', () => showProject(project));
-    title.append(open);
-    inner.append(top,title,element('p',project.summary),element('span',project.details.stack.slice(0,2).join(' · '),'tags'));
-    if (project.url) inner.append(siteLink(project.url));
-    card.append(art,inner);
+    title.append(button(project.title, 'card-open', () => showProject(project)));
+    const meta = element('div',undefined,'card-meta');
+    meta.append(element('span',project.category,'category'));
+    if (project.url) meta.append(siteLink(project.url));
+    inner.append(meta,title,element('p',project.summary));
+
+    if (project.action) {
+      const action = element('a',project.action.label,'card-action');
+      action.href = project.action.href;
+      inner.append(action);
+    } else {
+      inner.append(button('View case study →','card-action',() => showProject(project)));
+    }
+    if (project.id === 'nova-origins') {
+      const preview=button('','nova-preview',showNovaDesign);
+      const strip=new Image();
+      strip.src='assets/nova-domains.webp';
+      strip.alt='';
+      strip.width=1000;
+      strip.height=196;
+      strip.loading='lazy';
+      preview.append(strip,element('span','Preview the upcoming design ↗'));
+      card.append(preview,inner);
+    } else {
+      card.append(art,inner);
+    }
     grid.append(card);
   }
 }
@@ -101,8 +135,7 @@ function drawPlate(container, id) {
   container.append(canvas);
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
-  ctx.fillStyle = base;
-  ctx.fillRect(0,0,840,230);
+  // Transparent plates let the glass surface show through each drawing.
   ctx.strokeStyle = ctx.fillStyle = ink;
   ctx.globalAlpha = .26;
   for (let x=0;x<840;x+=20) for (let y=0;y<230;y+=20) ctx.fillRect(x,y,1.5,1.5);

@@ -4,7 +4,7 @@
     "title": "Nova Origins",
     "status": "Website",
     "category": "Web Apps",
-    "summary": "A research explorer for space, time, and ancient history. Trace signals across the sky, follow light near a black hole, and preview the human past.",
+    "summary": "Explore a live sky signal, or preview three investigations across deep time: The Cosmos, Earth & Life, and Human Origins & Civilizations.",
     "tags": [
       "Data visualization",
       "Research interfaces",
@@ -20,14 +20,18 @@
       ],
       "progress": "The signal field, source map, and black-hole research program are live on Nova Origins. Ancient Civilizations is planned for the main site. You can try its fossil image study here in the portfolio."
     },
-    "url": "https://nova-origins.com/"
+    "url": "https://nova-origins.com/",
+    "action": {
+      "label": "Explore a signal ↗",
+      "href": "https://nova-origins.com/signals"
+    }
   },
   {
     "id": "gooci",
     "title": "GOOCI Receipts",
     "status": "Website",
     "category": "Web Apps",
-    "summary": "Trace a corporate claim to its source and see where the evidence runs out.",
+    "summary": "Follow a corporate claim to the receipt that supports it.",
     "tags": [
       "Evidence design",
       "Data provenance",
@@ -43,14 +47,18 @@
       ],
       "progress": "The public website is at goociusa.com. The portfolio exercise uses a fictional receipt."
     },
-    "url": "https://goociusa.com/"
+    "url": "https://goociusa.com/",
+    "action": {
+      "label": "Trace a claim →",
+      "href": "#lab-evidence"
+    }
   },
   {
     "id": "hire-one",
     "title": "Hire One",
     "status": "Website",
     "category": "Web Apps",
-    "summary": "Help small businesses identify repetitive work and scope a practical first AI workflow.",
+    "summary": "Change a workflow and see how much time its human review takes.",
     "tags": [
       "Workflow design",
       "Web interfaces",
@@ -66,7 +74,11 @@
       ],
       "progress": "The portfolio includes a workload calculator with illustrative inputs. Visit gethireone.com for Hire One."
     },
-    "url": "https://gethireone.com/"
+    "url": "https://gethireone.com/",
+    "action": {
+      "label": "Estimate the time →",
+      "href": "#lab-workflow"
+    }
   },
   {
     "id": "agent-forge-academy",
@@ -74,7 +86,7 @@
     "status": "GitHub Adaptation",
     "category": "AI & Agents",
     "remix": true,
-    "summary": "Gamified agentic design and learning skills world monitor. Recreated and customized from an open-source GitHub repository to study multi-agent architecture.",
+    "summary": "Build an agent handoff and watch a support ticket move through it.",
     "tags": [
       "Agentic AI",
       "Open Source",
@@ -89,6 +101,10 @@
         "TypeScript"
       ],
       "progress": "Base repository recreated locally. Next: custom agent roles and a progress monitor."
+    },
+    "action": {
+      "label": "Run a handoff →",
+      "href": "#lab-agents"
     }
   },
   {
@@ -96,7 +112,7 @@
     "title": "Career Search Assistant",
     "status": "Active Build",
     "category": "AI & Agents",
-    "summary": "AI-powered workflow assistant built to streamline job discovery, role alignment, and application tracking.",
+    "summary": "See how role matching and application tracking fit into one workflow.",
     "tags": [
       "LLMs",
       "Workflow Automation",
@@ -118,7 +134,7 @@
     "title": "AI Build Lab",
     "status": "In Progress",
     "category": "AI & Agents",
-    "summary": "A generative AI learning portal and interactive sandbox for testing prompts, models, and practical business use cases.",
+    "summary": "Explore a sandbox for comparing prompts on practical business tasks.",
     "tags": [
       "Generative AI",
       "Learning Portal",

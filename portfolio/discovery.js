@@ -1,10 +1,9 @@
 const missions = [
-  {name:'Deep space', icon:'✧', project:'Nova Origins', title:'Explore the Cosmic Cliffs', instruction:'Tap the markers in Webb’s image to find the pillar rising from the ridge. Then enter Nova’s live space field and select a signal to see where it came from.', link:['Enter the live space field ↗','https://nova-origins.com/signals'], note:'The live field maps records from astronomy archives.', render:space},
-  {name:'Universe theory', icon:'◉', project:'Universe Theory · physics exercise', title:'Double a black hole’s horizon', instruction:'A black hole with five solar masses has a horizon about 14.8 km in radius. Adjust the mass until the new horizon is twice as large.', link:['Explore Nova’s research program ↗','https://nova-origins.com/universe-cinematic/'], note:'This exercise uses the Schwarzschild model for a nonrotating, uncharged black hole.', render:theory},
-  {name:'Ancient worlds', icon:'◇', project:'Nova Origins · Ancient Civilizations preview', title:'Read a 100,000-year-old face', instruction:'Inspect two features on the Skhūl V skull. Switch between the brow and the vault to learn what anatomists can see in its shape.', link:['Read the Smithsonian record ↗','https://humanorigins.si.edu/evidence/human-fossils/fossils/skh%C5%ABl-v'], note:'Mount Carmel, Israel. The fossil’s estimated age is 80,000–120,000 years.', render:archaeology},
-  {name:'Evidence trail', icon:'⌕', project:'GOOCI Receipts · sample case', title:'Trace a claim to its receipt', instruction:'The headline says twelve sites were reviewed. Open the underlying log, then narrow the report to entries with a signed review. Watch the headline change.', link:['Visit goociusa.com ↗','https://goociusa.com/'], note:'The company and records in this exercise are fictional.', render:evidence},
-  {name:'Workflow lab', icon:'⌁', project:'Hire One · workflow estimator', title:'Find time hiding in a task', instruction:'Set a weekly volume and handling time for a repeated task. Then change how many minutes a person still needs to review each result.', link:['Visit gethireone.com ↗','https://gethireone.com/'], note:'Illustrative estimate before setup, maintenance, and exceptions.', render:workflow},
-  {name:'Agent workshop', icon:'⤳', project:'Agent Forge Academy · practice sandbox', title:'Build a working handoff', instruction:'Route a sample support ticket. Add a reader, a classifier, and a router to the workbench in the order you want them to run. Test it and inspect the trace.', note:'Runs locally on a fixed example ticket. You can rebuild and replay the workflow.', render:agents},
+  {id:'lab-space', name:'Deep space', icon:'✧', project:'Nova Origins', title:'Find oxygen at cosmic dawn', instruction:'Open the circled galaxy in Webb’s deep field. Then compare two spectra to see how astronomers found oxygen in a galaxy this young.', link:['Enter the live space field ↗','https://nova-origins.com/signals'], note:'JADES-GS-z14-0 · About 290 million years after the Big Bang.', render:space},
+  {id:'lab-universe', name:'Universe theory', icon:'◉', project:'Universe Theory · physics exercise', title:'Double a black hole’s horizon', instruction:'A black hole with five solar masses has a horizon about 14.8 km in radius. Adjust the mass until the new horizon is twice as large.', link:['Explore Nova’s research program ↗','https://nova-origins.com/universe-cinematic/'], note:'This exercise uses the Schwarzschild model for a nonrotating, uncharged black hole.', render:theory},
+  {id:'lab-evidence', name:'Evidence trail', icon:'⌕', project:'GOOCI Receipts · sample case', title:'Trace a claim to its receipt', instruction:'The headline says twelve sites were reviewed. Open the underlying log, then narrow the report to entries with a signed review. Watch the headline change.', link:['Visit goociusa.com ↗','https://goociusa.com/'], note:'The company and records in this exercise are fictional.', render:evidence},
+  {id:'lab-workflow', name:'Workflow lab', icon:'⌁', project:'Hire One · workflow estimator', title:'Find time hiding in a task', instruction:'Set a weekly volume and handling time for a repeated task. Then change how many minutes a person still needs to review each result.', link:['Visit gethireone.com ↗','https://gethireone.com/'], note:'Illustrative estimate before setup, maintenance, and exceptions.', render:workflow},
+  {id:'lab-agents', name:'Agent workshop', icon:'⤳', project:'Agent Forge Academy · practice sandbox', title:'Build a working handoff', instruction:'Route a sample support ticket. Add a reader, a classifier, and a router to the workbench in the order you want them to run. Test it and inspect the trace.', note:'Runs locally on a fixed example ticket. You can rebuild and replay the workflow.', render:agents},
 ];
 const picker = document.querySelector('#missions');
 const station = document.querySelector('#station');
@@ -30,7 +29,7 @@ function action(text, fn, cls='control') {
 }
 function mount(mission,index) {
   const panel = make('section',undefined,'station');
-  panel.id = 'experience-' + index;
+  panel.id = mission.id;
   const tab = action('',() => {
     for (const item of station.children) item.hidden = item !== panel;
     for (const item of picker.children) item.setAttribute('aria-pressed',String(item === tab));
@@ -49,10 +48,11 @@ function mount(mission,index) {
   copy.append(make('p',mission.project,'mono'),title,make('p',mission.instruction));
   const feedback=make('p','','finding');
   feedback.setAttribute('role','status');
-  copy.append(feedback);
-  if(mission.link) copy.append(link(...mission.link));
   copy.append(make('small',mission.note));
-  panel.append(stage,copy);
+  const result = make('div',undefined,'station-result');
+  result.append(feedback);
+  if(mission.link) result.append(link(...mission.link));
+  panel.append(copy,stage,result);
   station.append(panel);
   panel.hidden=index!==0;
   mission.render(stage,(text,earned=false)=>{
@@ -67,6 +67,8 @@ function mount(mission,index) {
 function imageField(stage,src,alt,cls) {
   const figure=make('figure',undefined,'field-image '+cls);
   const image=new Image();
+  image.loading='lazy';
+  image.decoding='async';
   image.src=src;
   image.alt=alt;
   figure.append(image);
@@ -86,11 +88,44 @@ function marker(figure,x,y,label,number,inspect) {
   figure.append(pin);
 }
 function space(stage,report) {
-  const figure=imageField(stage,'assets/cosmic-cliffs.jpg','Webb infrared view of blue open space above a scalloped copper wall, with a small upright pillar on the left.','cliffs');
-  marker(figure,19,30,'Inspect the upright pillar','A',()=>report('Pillar located. Hot stars are eroding the gas and dust around it, carving out the cavity you see in blue.',true));
-  marker(figure,36,11,'Inspect a bright star','B',()=>report('Those sharp rays are diffraction spikes around a bright star. Look below and left for a shape connected to the ridge.'));
-  marker(figure,75,72,'Inspect the cloud interior','C',()=>report('This patch is inside the dusty wall. Follow the boundary toward the left until a single peak rises against the blue.'));
-  stage.append(link('Cosmic Cliffs · Webb / NIRCam · NASA, ESA, CSA, STScI ↗','https://esawebb.org/images/weic2205a/'));
+  const webb='https://esawebb.org/images/jades4/';
+  const webbCredit='Webb image: NASA, ESA, CSA, STScI, B. Robertson, B. Johnson, S. Tacchella and P. Cargile.';
+  const views=[
+    {label:'Webb field',src:'assets/jades-field.webp',alt:'An infrared field of distant galaxies. A locator near the bottom connects to Webb’s magnified inset at upper right.',finding:'The small outline marks JADES-GS-z14-0 among thousands of galaxies.',credit:'Webb / JADES image and credits ↗',url:webb},
+    {label:'Galaxy close-up',src:'assets/jades-galaxy.webp',alt:'Webb’s enlarged inset. A white pointer marks the faint red galaxy beside a brighter blue-white object.',finding:'The pointer marks JADES-GS-z14-0. Its measured redshift is about 14, meaning cosmic expansion stretched its light to roughly 15 times its original wavelength.',credit:'Webb / JADES inset and credits ↗',url:webb},
+    {label:'Oxygen spectra',src:'assets/jades-oxygen.webp',alt:'Two independent ALMA spectra each show a highlighted yellow peak at the same position. The blue inset shows the galaxy in ALMA data.',finding:'Both teams measured the same peak from ionized oxygen. Stars had already made oxygen and enriched the gas in this galaxy within the universe’s first 300 million years.',credit:'ALMA oxygen measurements and credits ↗',url:'https://www.eso.org/public/images/eso2507b/'}
+  ];
+  const figure=imageField(stage,views[0].src,views[0].alt,'jades');
+  const image=figure.querySelector('img');
+  const target=action('',()=>show(1),'target');
+  target.setAttribute('aria-label','Zoom in on JADES-GS-z14-0');
+  const controls=make('div',undefined,'field-views');
+  controls.setAttribute('role','group');
+  controls.setAttribute('aria-label','Observation views');
+  const credit=link(views[0].credit,webb);
+  const attribution=make('small',webbCredit,'field-credit');
+  const seen=new Set();
+  function show(index) {
+    const view=views[index];
+    image.src=view.src;
+    image.alt=view.alt;
+    target.hidden=index!==0;
+    for (const [i,control] of Array.from(controls.children).entries())
+      control.setAttribute('aria-pressed',String(i===index));
+    credit.textContent=view.credit;
+    credit.href=view.url;
+    attribution.textContent=index===2 ? 'ALMA (ESO/NAOJ/NRAO), S. Carniani et al. and S. Schouws et al. '+webbCredit : webbCredit;
+    seen.add(index);
+    report(view.finding,seen.has(1) && seen.has(2));
+  }
+  views.forEach((view,index)=>{
+    const control=action(view.label,()=>show(index));
+    control.setAttribute('aria-pressed',String(index===0));
+    controls.append(control);
+  });
+  target.addEventListener('click',()=>controls.children[1].focus());
+  figure.append(target);
+  stage.append(controls,credit,attribution);
 }
 function slider(parent,label,min,max,value,change) {
   const wrap=make('label',undefined,'slider');
@@ -210,3 +245,25 @@ function agents(stage,report) {
   stage.append(bench);
 }
 missions.forEach(mount);
+
+// A project tile can open its own activity, including on a bookmarked URL.
+function openLinkedMission() {
+  const id = location.hash.slice(1);
+  const index = missions.findIndex(mission => mission.id === id);
+  if (index < 0) return;
+  picker.children[index].click();
+  document.querySelector('#test').scrollIntoView();
+}
+window.addEventListener('hashchange', openLinkedMission);
+document.querySelector('#projects').addEventListener('click', event => {
+  const anchor = event.target.closest('a[href^="#lab-"]');
+  if (anchor && anchor.hash === location.hash) {
+    event.preventDefault();
+    openLinkedMission();
+  }
+});
+openLinkedMission();
+
+archaeology(document.querySelector('#specimen'), text => {
+  document.querySelector('#specimen-finding').textContent = text;
+});

@@ -10,23 +10,60 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header><div class="frame header-inner"><a class="brand" href="#main"><i class="orbit-mark" aria-hidden="true"></i>Jason Davis</a>
-<nav aria-label="Portfolio"><a href="#work">Projects</a><a href="#skills">Skills</a><a class="test-link" href="#test">Discovery lab <span aria-hidden="true">↗</span></a></nav></div></header>
-<main id="main" class="frame">
-<section class="hero" aria-labelledby="intro">
-<div class="hero-art" aria-hidden="true"></div>
-<div class="bio"><p class="mono identity">AI implementation &amp; automation</p>
-<h1 id="intro">Step inside<br><em>my work.</em></h1>
-<p class="summary">I’m Jason Davis. I build tools that help people explore research, trace evidence, and find the work worth automating.</p>
-<div class="actions"><a class="button solid" href="https://nova-origins.com/research-updates#:~:text=GRB%20261113A%20receives%20rapid%20multi%2Dobservatory%20follow%2Dup" target="_blank" rel="noopener noreferrer" title="Explore gamma-ray burst GRB 261113A on Nova Origins">Try a discovery <span aria-hidden="true">↗</span></a><a class="plain" href="#work">Browse projects <span aria-hidden="true">↘</span></a></div></div>
-<a class="hero-destination" target="_blank" rel="noopener noreferrer" href="https://nova-origins.com/sources"><span class="live-dot"></span> Nova Origins <strong>Explore the source map ↗</strong></a>
-</section>
-<section id="test" class="lab" aria-labelledby="lab-title"><div class="lab-heading"><div><h2 id="lab-title">Discovery lab</h2></div><span id="log-count" class="log-count" aria-live="polite">0 / 6 explored</span></div>
-<div id="missions" class="mission-picker" role="group" aria-label="Choose an experience"></div>
-<div id="station"></div></section>
-<section id="work" class="work" aria-labelledby="work-title"><div class="work-head"><h2 id="work-title">Project index</h2><div id="filters" class="filters" aria-label="Filter projects"></div></div>
-<div id="projects" class="project-grid"></div><p id="results" class="sr" aria-live="polite"></p></section>
-<section class="skills section" id="skills"><div class="section-intro"><h2>Skills in practice</h2><p>How I apply each skill, with a project you can inspect.</p></div><div id="skill-list"></div></section>
+<header>
+  <div class="frame header-inner">
+    <a class="brand" href="#main"><i class="orbit-mark" aria-hidden="true"></i>Jason Davis</a>
+    <nav aria-label="Portfolio"><a href="#work">Projects</a><a href="#skills">Skills</a><a href="#test">Discovery Lab</a></nav>
+  </div>
+</header>
+<main id="main">
+  <section class="hero" aria-labelledby="intro">
+    <div class="hero-art" aria-hidden="true"></div>
+    <div class="frame hero-layout">
+      <div class="bio">
+        <p class="identity">AI implementation &amp; automation</p>
+        <h1 id="intro">Jason Davis</h1>
+        <p class="summary">I build research tools and AI workflows that help people trace evidence and find the work worth automating.</p>
+        <div class="actions">
+          <a class="button primary" href="https://nova-origins.com/research-updates#:~:text=GRB%20261113A%20receives%20rapid%20multi%2Dobservatory%20follow%2Dup" target="_blank" rel="noopener noreferrer" title="Explore gamma-ray burst GRB 261113A on Nova Origins">Try a discovery <span aria-hidden="true">↗</span></a>
+          <a class="button secondary" href="#work">Browse projects <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      <a class="source-map" target="_blank" rel="noopener noreferrer" href="https://nova-origins.com/sources">Nova Origins <span>Source map ↗</span></a>
+    </div>
+  </section>
+
+  <div class="deep-space">
+    <section id="work" class="frame work" aria-labelledby="work-title">
+      <div class="work-head"><h2 id="work-title">Selected projects</h2><div id="filters" class="filters" role="group" aria-label="Filter projects"></div></div>
+      <div id="projects" class="project-grid"></div><p id="results" class="sr" aria-live="polite"></p>
+    </section>
+    <section id="test" class="frame lab" aria-labelledby="lab-title">
+      <div class="lab-heading"><h2 id="lab-title">Discovery Lab</h2><span id="log-count" class="log-count" aria-live="polite">0 / 5 explored</span></div>
+      <div id="missions" class="mission-picker" role="group" aria-label="Choose an experience"></div>
+      <div id="station"></div>
+    </section>
+  </div>
+
+  <div class="descent">
+    <section id="skills" class="frame skills" aria-labelledby="skills-title">
+      <div class="section-intro"><h2 id="skills-title">Skills in practice</h2></div>
+      <div id="skill-list"></div>
+    </section>
+    <section id="human-past" class="landfall" aria-labelledby="history-title">
+      <div class="frame history-grid">
+        <div class="history-intro">
+          <p class="identity">Nova Origins · Ancient Civilizations preview</p>
+          <h2 id="history-title">The human past.</h2>
+          <p class="history-lead">Skhūl V <span>·</span> Mount Carmel, Israel</p>
+          <p>This early human fossil dates to about <strong>80,000–120,000 years ago</strong>. Inspect the brow ridge and the rounded vault to see what the shape of a skull can tell us.</p>
+          <p class="history-note">A portfolio preview of the Ancient Civilizations component planned for Nova Origins.</p>
+        </div>
+        <div class="stage specimen-stage" id="specimen"></div>
+        <div class="history-result"><p id="specimen-finding" class="finding" role="status"></p><a class="button secondary" href="https://humanorigins.si.edu/evidence/human-fossils/fossils/skh%C5%ABl-v" target="_blank" rel="noopener noreferrer">Open the Smithsonian record ↗</a></div>
+      </div>
+    </section>
+  </div>
 </main>
 <footer><div class="frame"><span>Jason Davis · Systems portfolio</span><a href="#main">Back to top ↑</a></div></footer>
 <dialog id="details" aria-labelledby="detail-title"><div id="detail-body"></div><button id="close" class="circle" aria-label="Close project details">×</button></dialog>
