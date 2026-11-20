@@ -81,6 +81,161 @@
     }
   },
   {
+    "id": "my-slp",
+    "title": "My-SLP",
+    "category": "Mobile app",
+    "status": "Practice prototype",
+    "summary": "A child taps a wagon, watches it go, then matches the picture. Short turns make one word the focus of a speech-practice game.",
+    "details": {
+      "useCase": "My Home SLP gives caregivers a way to practice words with a child at home. Animal Adventure pairs each word with a visible action.",
+      "role": "Designed the play sequence and connected modeled words, recording, playback and caregiver feedback in a local-first app.",
+      "stack": [
+        "React",
+        "Vite",
+        "Capacitor",
+        "Local session state"
+      ],
+      "progress": "The GO sequence has recorded tablet and phone screens. The POP practice loop also has regression tests. Device and caregiver validation are the next milestones."
+    },
+    "exhibit": {
+      "action": "Walk through the app",
+      "instruction": "Choose a moment from the GO round. These are captured app screens.",
+      "cover": "assets/slp-go.webp",
+      "states": [
+        {
+          "label": "Tap",
+          "image": "assets/slp-go.webp",
+          "alt": "Animal Adventure shows a child and a dog in a red wagon inside a highlighted touch target.",
+          "text": "The outlined wagon is the tap target. Moving it gives “go” a meaning the child can see."
+        },
+        {
+          "label": "Watch",
+          "image": "assets/slp-model.webp",
+          "alt": "A hand cue appears on the moving red wagon.",
+          "text": "A hand demonstrates the action, giving the child a model before their next turn."
+        },
+        {
+          "label": "Match",
+          "image": "assets/slp-match.webp",
+          "alt": "A wagon prompt appears above two picture choices, a star and a wagon.",
+          "text": "The child chooses between the star and the wagon. A picture match practices recognition separately from saying the word."
+        }
+      ]
+    },
+    "inDevelopment": true
+  },
+  {
+    "id": "real-story-machine",
+    "title": "Real Story Machine",
+    "category": "Web Apps",
+    "status": "Private alpha",
+    "summary": "Turn a family memory into a bedtime story. An adult approves the facts and the draft before the Voicebox narration step.",
+    "details": {
+      "useCase": "Nova Starbound Stories helps an adult turn a remembered event into a story the family can listen to again.",
+      "role": "Built a review workflow from source material to approved facts, drafts and private audio. The family-voice gateway includes an adapter for Voicebox, an open-source voice studio.",
+      "stack": [
+        "Python",
+        "PostgreSQL",
+        "Story generation",
+        "Voicebox integration"
+      ],
+      "progress": "Memory Adventure has a private development workflow for reviewing facts, approving drafts and exporting audio. Wider beta access and narrator validation are still ahead."
+    },
+    "exhibit": {
+      "action": "Edit a sample memory",
+      "instruction": "Choose which detail an adult approves for this fictional memory. Compare the resulting story openings.",
+      "quote": "We followed the puddles all the way home.",
+      "states": [
+        {
+          "label": "The walk",
+          "text": "“On the way home, we followed the puddles. Big ones, little ones, all the way to our door.”",
+          "context": "Approved detail · We walked home through puddles."
+        },
+        {
+          "label": "Add the red boots",
+          "text": "“On the way home, your red boots found every puddle. Splash, step, splash, all the way to our door.”",
+          "context": "Approved details · We walked home through puddles. You wore red boots."
+        }
+      ]
+    },
+    "inDevelopment": true
+  },
+  {
+    "id": "terpenee",
+    "title": "Terpenee System",
+    "category": "Engineering",
+    "status": "Simulation testing",
+    "summary": "An experiment in how far AI-assisted engineering can take a physical design. Explore the controller for a drying and curing cabinet, from sensor readings to fault handling.",
+    "details": {
+      "useCase": "Keep track of temperature and humidity across cabinet zones and examine how a controller responds when conditions change.",
+      "role": "Used AI-assisted design across controller software, embedded firmware, circuit boards and enclosures. Built a simulated cabinet so control decisions can be replayed before hardware trials.",
+      "stack": [
+        "Python",
+        "Embedded C",
+        "SQLite",
+        "KiCad",
+        "Environmental simulation"
+      ],
+      "progress": "The simulator, firmware and dashboard have recorded test runs. The next physical milestone is comparing cabinet sensor readings with an independent reference."
+    },
+    "exhibit": {
+      "action": "Inspect the controller",
+      "instruction": "Choose a scenario to see the expected controller response. The image is a capture from the simulator.",
+      "cover": "assets/terpenee-zones.webp",
+      "states": [
+        {
+          "label": "Monitor zones",
+          "text": "The dashboard keeps each zone’s temperature and relative humidity together so a reviewer can compare conditions."
+        },
+        {
+          "label": "Open door",
+          "text": "Expected response · HOLD. Opening the door interrupts the controlled environment, so the controller pauses the cycle."
+        },
+        {
+          "label": "Missing probe",
+          "text": "Expected response · FAULT. A missing probe removes a measurement the controller needs. The fault record gives the reviewer a place to start."
+        }
+      ],
+      "alt": "Two simulated cabinet zones display temperature, humidity and controller requests side by side."
+    },
+    "inDevelopment": true
+  },
+  {
+    "id": "civic-signal",
+    "title": "Civic Signal Minnesota",
+    "category": "Research tools",
+    "status": "Working prototype",
+    "summary": "Find decisions buried in local-government agendas while there is still time for a researcher to read the proposal and its source.",
+    "details": {
+      "useCase": "Help a reviewer decide which upcoming local issues deserve closer reading, with the original agenda attached.",
+      "role": "Built a pipeline that reads configured public notices, preserves the source and first-seen time, and produces a daily review digest.",
+      "stack": [
+        "Python",
+        "SQLite",
+        "Document extraction",
+        "Source provenance"
+      ],
+      "progress": "The prototype generates digests and records how early an issue was detected. Coverage and reviewer precision are being evaluated."
+    },
+    "exhibit": {
+      "action": "Read a sample agenda",
+      "instruction": "Choose an item from the project’s fictional municipal agenda to see what a reviewer would follow up.",
+      "states": [
+        {
+          "label": "Road hearing",
+          "context": "Sample agenda · Oak Avenue",
+          "text": "A public hearing concerns a road and stormwater assessment. A reviewer would open the hearing notice to check the date and which properties the assessment covers."
+        },
+        {
+          "label": "Utility fees",
+          "context": "Sample agenda · Council vote",
+          "text": "The agenda lists a vote on a utility fee resolution. A reviewer would read the resolution for the proposed rate and when it would take effect."
+        }
+      ]
+    },
+    "inDevelopment": true
+  },
+  {
     "id": "agent-forge-academy",
     "title": "Agent Forge Academy",
     "status": "GitHub Adaptation",
@@ -111,8 +266,8 @@
     "id": "career-search-assistant",
     "title": "Career Search Assistant",
     "status": "Active Build",
-    "category": "AI & Agents",
-    "summary": "See how role matching and application tracking fit into one workflow.",
+    "category": "Desktop app",
+    "summary": "Compare a job requirement with evidence from past work, then track the application and the résumé used to apply.",
     "tags": [
       "LLMs",
       "Workflow Automation",
@@ -120,14 +275,19 @@
     ],
     "details": {
       "useCase": "Reduce the manual load of job searching by matching roles to a profile and tracking applications in one place.",
-      "role": "Designed the workflow, prompt chains, and tracking data model.",
+      "role": "Connected a local accomplishment ledger to role matching, résumé review and the desktop application tracker.",
       "stack": [
-        "LLMs",
-        "Workflow Automation",
-        "API Integration"
+        "Python",
+        "PySide6",
+        "SQLite",
+        "Evidence matching"
       ],
-      "progress": "Active build. Core matching flow works end to end. Next: application status tracking and follow-up reminders."
-    }
+      "progress": "The desktop app already links matching, résumé generation and application tracking. The next question is which fit signals predict interview outcomes."
+    },
+    "inDevelopment": true,
+    "topics": [
+      "AI & Agents"
+    ]
   },
   {
     "id": "ai-build-lab",

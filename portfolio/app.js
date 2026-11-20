@@ -41,11 +41,43 @@ function showNovaDesign() {
   dialog.scrollTop=0;
 }
 dialog.addEventListener('close',()=>dialog.classList.remove('design-preview'));
+function projectExhibit(project) {
+  const {exhibit}=project;
+  const section=element('section',undefined,'exhibit');
+  section.append(element('p',exhibit.instruction));
+  const choices=element('div',undefined,'exhibit-choices');
+  choices.setAttribute('role','group');
+  choices.setAttribute('aria-label',exhibit.action);
+  const result=element('div',undefined,'exhibit-result');
+  result.setAttribute('role','status');
+  section.append(choices,result);
+
+  function selectState(index) {
+    const state=exhibit.states[index];
+    result.replaceChildren();
+    const src=state.image || exhibit.cover;
+    if (src) {
+      const image=new Image();
+      image.src=src;
+      image.alt=state.alt || exhibit.alt;
+      result.append(image);
+    }
+    if (state.context) result.append(element('small',state.context));
+    result.append(element(exhibit.quote ? 'blockquote' : 'p',state.text));
+    Array.from(choices.children).forEach((item,i)=>item.setAttribute('aria-pressed',String(i===index)));
+  }
+  exhibit.states.forEach((state,index)=>{
+    choices.append(button(state.label,'control',()=>selectState(index)));
+  });
+  selectState(0);
+  return section;
+}
 function showProject(project) {
   const title = element('h2', project.title);
   title.id = 'detail-title';
   const body = select('#detail-body');
   body.replaceChildren(element('p', [project.category, project.status].join(' · '), 'mono'), title);
+  if (project.exhibit) body.append(projectExhibit(project));
   for (const [label, description] of [
     ['Use case', project.details.useCase],
     ['My contribution', project.details.role],
@@ -66,8 +98,9 @@ dialog.addEventListener('click', event => {
 });
 
 const filters = [
-  ['All', () => true], ['AI & Agents', p => p.category === 'AI & Agents'],
-  ['Web Apps', p => p.category === 'Web Apps'], ['In progress', p => p.status === 'In Progress'],
+  ['All', () => true], ['AI & Agents', p => p.category === 'AI & Agents' || p.topics?.includes('AI & Agents')],
+  ['Web Apps', p => p.category === 'Web Apps'], ['Mobile & desktop', p => ['Mobile app','Desktop app'].includes(p.category)],
+  ['In progress', p => p.inDevelopment || p.status === 'In Progress'],
   ['Remixes', p => p.remix],
 ];
 function drawCatalog(label, predicate) {
@@ -81,13 +114,14 @@ function drawCatalog(label, predicate) {
     card.dataset.project = project.id;
     const art = element('div', undefined, 'card-art');
     art.setAttribute('aria-hidden','true');
-    if (project.id !== 'nova-origins') drawPlate(art, project.id);
+    if (!project.exhibit && project.id !== 'nova-origins') drawPlate(art, project.id);
 
     const inner = element('div', undefined, 'card-inner');
     const title = element('h3');
     title.append(button(project.title, 'card-open', () => showProject(project)));
     const meta = element('div',undefined,'card-meta');
     meta.append(element('span',project.category,'category'));
+    if (project.exhibit) meta.append(element('span',project.status,'project-status'));
     if (project.url) meta.append(siteLink(project.url));
     inner.append(meta,title,element('p',project.summary));
 
@@ -96,7 +130,7 @@ function drawCatalog(label, predicate) {
       action.href = project.action.href;
       inner.append(action);
     } else {
-      inner.append(button('View case study →','card-action',() => showProject(project)));
+      inner.append(button((project.exhibit?.action || 'View case study')+' →','card-action',() => showProject(project)));
     }
     if (project.id === 'nova-origins') {
       const preview=button('','nova-preview',showNovaDesign);
@@ -108,6 +142,20 @@ function drawCatalog(label, predicate) {
       strip.loading='lazy';
       preview.append(strip,element('span','Preview the upcoming design ↗'));
       card.append(preview,inner);
+    } else if (project.exhibit) {
+      card.classList.add('showcase-card');
+      const {cover,quote}=project.exhibit;
+      if (cover) {
+        const image=new Image();
+        image.className='showcase-cover';
+        image.src=cover;
+        image.alt='';
+        image.loading='lazy';
+        card.append(image);
+      } else if (quote) {
+        card.append(element('blockquote',quote,'story-excerpt'));
+      }
+      card.append(inner);
     } else {
       card.append(art,inner);
     }

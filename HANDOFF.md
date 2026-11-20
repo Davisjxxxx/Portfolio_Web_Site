@@ -21,6 +21,16 @@ The Nova project tile shows a crop of the local Frontend Revision 01 review scre
 
 The Webb field and galaxy inset are crops of the JADES release image. Credit NASA, ESA, CSA, STScI, B. Robertson, B. Johnson, S. Tacchella and P. Cargile. The spectra image is credited to ALMA (ESO/NAOJ/NRAO), S. Carniani et al., S. Schouws et al. and the Webb image team. [Webb image and credits](https://esawebb.org/images/jades4/) · [ALMA image and credits](https://www.eso.org/public/images/eso2507b/) · [Oxygen discovery](https://www.eso.org/public/news/eso2507/).
 
+## Apps and prototypes
+
+| Portfolio project | Source for the showcase | What visitors can inspect |
+| --- | --- | --- |
+| My-SLP (My Home SLP) | `My-Home-SLP/docs/evidence/go-tap/actionable-tablet.png`, `go-demo/demo-tablet.png` and `go-picture-match/matching-tablet.png` under the same evidence directory | Three real Animal Adventure tablet screens from the GO round, converted to WebP |
+| Real Story Machine (Nova Starbound Stories) | `real-story-machine/README.md`, `docs/BETA_RELEASE_STATE_CHANGE_RECORD.md` and `services/family_voice_gateway/nova_family_voice_gateway/upstream.py` | Two locally written sample openings illustrate adult approval of story details. Voicebox is an upstream tool. |
+| Terpenee System | `Terpenee_System/dcts/simulation/firmware/v4_8_1/results/browser/native/dashboard-multizone.png` and `dcts/release/v5_0_2/MVP_VALIDATION_PLAN.md` | A cropped simulator capture and explanations of the expected door and probe responses |
+| Civic Signal Minnesota | `ACIO-RADAR/README.md` and `tests/fixtures/agenda_sample.html` | Two fictional agenda items with sample reviewer questions |
+| Career Search Assistant | `Career_Search_Assistant/README.md` | Case study of the desktop app’s evidence matching and application tracking |
+
 ## Original site capture
 
 Source <https://jasonda-8862p4t.runable.site/>. The local-only files under `reference/` preserve the published homepage, exact client JavaScript and CSS, favicon, host script, desktop and mobile screenshots, extracted project records, rendered page text, and filter membership. The HTML depends on the original host's asset paths. The new preview is self-contained.

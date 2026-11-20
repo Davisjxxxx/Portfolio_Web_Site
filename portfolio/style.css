@@ -82,6 +82,18 @@ dialog.design-preview {width:min(1000px,94vw);max-width:94vw}
 .card-meta .site-link {font:11px DM,sans-serif;color:#bac7d6}
 .card h3 {font-size:clamp(22px,2.1vw,31px);letter-spacing:-.048em;line-height:1.12}
 .card[data-project="nova-origins"] h3 {font-size:clamp(38px,3.6vw,52px);margin-top:7px}
+.showcase-card {flex-direction:column}
+.showcase-cover,.story-excerpt {width:100%;height:125px;border-bottom:1px solid var(--line)}
+.showcase-cover {object-fit:cover;object-position:50% 50%}
+.story-excerpt {display:flex;align-items:center;margin:0;padding:14px 24px;font:30px/1.1 Instrument,Georgia,serif;color:#f6e4cd;background:linear-gradient(120deg,#482c3c,#232137)}
+.project-status {color:#c5cbd4;font-size:12px}
+.exhibit {margin:18px 0 24px}
+.exhibit-choices {display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+.exhibit-choices [aria-pressed=true] {border-color:var(--copper);color:#ffd6ae}
+.exhibit-result {padding:14px;background:#0b141d;border:1px solid var(--line);border-radius:9px}
+.exhibit-result img {display:block;max-width:100%;max-height:32vh;margin:0 auto 12px;border-radius:5px}
+.exhibit-result small {display:block;color:var(--copper);margin-bottom:7px}
+.exhibit-result blockquote {font:26px/1.2 Instrument,Georgia,serif}
 .card-open,.card-action {background:none;border:0;text-align:left;padding:0;font:inherit;letter-spacing:inherit}
 .card-open:hover {text-decoration:underline;text-underline-offset:4px}
 .card p {font-size:14px;color:#c3cedb;max-width:40ch;line-height:1.5}
