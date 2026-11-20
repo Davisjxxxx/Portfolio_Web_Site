@@ -1,0 +1,138 @@
+[
+  {
+    "id": "nova-origins",
+    "title": "Nova Origins",
+    "status": "Website",
+    "category": "Web Apps",
+    "summary": "A research explorer for space, time, and ancient history. Trace signals across the sky, follow light near a black hole, and preview the human past.",
+    "tags": [
+      "Data visualization",
+      "Research interfaces",
+      "Source traceability"
+    ],
+    "details": {
+      "useCase": "Start with something you can see, then explore the evidence behind it: an archive signal, a black-hole calculation, or a feature on an ancient fossil.",
+      "role": "Research interface design and implementation, with a focus on helping visitors read the evidence.",
+      "stack": [
+        "Data visualization",
+        "Research interfaces",
+        "Source traceability"
+      ],
+      "progress": "The signal field, source map, and black-hole research program are live on Nova Origins. Ancient Civilizations is planned for the main site. You can try its fossil image study here in the portfolio."
+    },
+    "url": "https://nova-origins.com/"
+  },
+  {
+    "id": "gooci",
+    "title": "GOOCI Receipts",
+    "status": "Website",
+    "category": "Web Apps",
+    "summary": "Trace a corporate claim to its source and see where the evidence runs out.",
+    "tags": [
+      "Evidence design",
+      "Data provenance",
+      "Web interfaces"
+    ],
+    "details": {
+      "useCase": "Make a corporate claim inspectable by showing its supporting evidence and coverage limits.",
+      "role": "Designed the web experience around source-backed corporate intelligence.",
+      "stack": [
+        "Evidence design",
+        "Data provenance",
+        "Web interfaces"
+      ],
+      "progress": "The public website is at goociusa.com. The portfolio exercise uses a fictional receipt."
+    },
+    "url": "https://goociusa.com/"
+  },
+  {
+    "id": "hire-one",
+    "title": "Hire One",
+    "status": "Website",
+    "category": "Web Apps",
+    "summary": "Help small businesses identify repetitive work and scope a practical first AI workflow.",
+    "tags": [
+      "Workflow design",
+      "Web interfaces",
+      "Cloudflare Pages"
+    ],
+    "details": {
+      "useCase": "Turn a recurring business task into a workflow that can be discussed in a discovery session.",
+      "role": "Built the discovery website and its intake experience.",
+      "stack": [
+        "Workflow design",
+        "Web interfaces",
+        "Cloudflare Pages"
+      ],
+      "progress": "The portfolio includes a workload calculator with illustrative inputs. Visit gethireone.com for Hire One."
+    },
+    "url": "https://gethireone.com/"
+  },
+  {
+    "id": "agent-forge-academy",
+    "title": "Agent Forge Academy",
+    "status": "GitHub Adaptation",
+    "category": "AI & Agents",
+    "remix": true,
+    "summary": "Gamified agentic design and learning skills world monitor. Recreated and customized from an open-source GitHub repository to study multi-agent architecture.",
+    "tags": [
+      "Agentic AI",
+      "Open Source",
+      "Gamified Learning"
+    ],
+    "details": {
+      "useCase": "A hands-on way to learn multi-agent design by playing through agent roles, handoffs, and monitoring.",
+      "role": "Adapted and customized the open-source base; reworked the agent flow and monitoring views for study.",
+      "stack": [
+        "Agentic AI",
+        "Multi-agent orchestration",
+        "TypeScript"
+      ],
+      "progress": "Base repository recreated locally. Next: custom agent roles and a progress monitor."
+    }
+  },
+  {
+    "id": "career-search-assistant",
+    "title": "Career Search Assistant",
+    "status": "Active Build",
+    "category": "AI & Agents",
+    "summary": "AI-powered workflow assistant built to streamline job discovery, role alignment, and application tracking.",
+    "tags": [
+      "LLMs",
+      "Workflow Automation",
+      "AI Use Case"
+    ],
+    "details": {
+      "useCase": "Reduce the manual load of job searching by matching roles to a profile and tracking applications in one place.",
+      "role": "Designed the workflow, prompt chains, and tracking data model.",
+      "stack": [
+        "LLMs",
+        "Workflow Automation",
+        "API Integration"
+      ],
+      "progress": "Active build. Core matching flow works end to end. Next: application status tracking and follow-up reminders."
+    }
+  },
+  {
+    "id": "ai-build-lab",
+    "title": "AI Build Lab",
+    "status": "In Progress",
+    "category": "AI & Agents",
+    "summary": "A generative AI learning portal and interactive sandbox for testing prompts, models, and practical business use cases.",
+    "tags": [
+      "Generative AI",
+      "Learning Portal",
+      "Prototyping"
+    ],
+    "details": {
+      "useCase": "A sandbox to compare prompts and models against real business tasks before committing to a workflow.",
+      "role": "Built the sandbox structure and prompt-testing flow; curating use cases.",
+      "stack": [
+        "Generative AI",
+        "Prompt Engineering",
+        "React"
+      ],
+      "progress": "Sandbox and first use-case set are live internally. Next: side-by-side model comparisons."
+    }
+  }
+]
