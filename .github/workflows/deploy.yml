@@ -1,0 +1,106 @@
+name: Validate & Deploy Portfolio
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-jasondavislab
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate static site & Wrangler config
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check portfolio/app.js
+          node --check portfolio/discovery.js
+
+      - name: Validate projects.json and local asset references
+        run: |
+          node -e '
+            const fs = require("fs");
+            const path = require("path");
+
+            const root = path.resolve("portfolio");
+            for (const file of ["index.html", "style.css", "app.js", "discovery.js", "projects.json"]) {
+              if (!fs.existsSync(path.join(root, file))) {
+                throw new Error(`Missing required file: portfolio/${file}`);
+              }
+            }
+
+            const projects = JSON.parse(fs.readFileSync(path.join(root, "projects.json"), "utf8"));
+            if (!Array.isArray(projects) || projects.length === 0) {
+              throw new Error("projects.json must be a non-empty array");
+            }
+            for (const p of projects) {
+              if (!p.id || !p.title || !p.summary || !p.details) {
+                throw new Error(`Invalid project entry: ${JSON.stringify(p)}`);
+              }
+            }
+
+            const sources = ["index.html", "style.css", "app.js", "discovery.js"]
+              .map((f) => fs.readFileSync(path.join(root, f), "utf8"))
+              .join("\n");
+            const refs = [...new Set([...sources.matchAll(/assets\/[A-Za-z0-9._-]+/g)].map((m) => m[0]))];
+            for (const ref of refs) {
+              if (!fs.existsSync(path.join(root, ref))) {
+                throw new Error(`Referenced asset missing: portfolio/${ref}`);
+              }
+            }
+            console.log(`Validated ${projects.length} projects and ${refs.length} referenced assets.`);
+          '
+
+      - name: Dry-run Wrangler deployment
+        run: npx --yes wrangler@4 deploy --dry-run
+
+  deploy:
+    name: Deploy to Cloudflare (jasondavislab.dev)
+    needs: validate
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://jasondavislab.dev
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check Cloudflare API token
+        id: check_token
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -n "$CF_TOKEN" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::CLOUDFLARE_API_TOKEN secret is not set; skipping automatic deploy. Add CLOUDFLARE_API_TOKEN in GitHub repo Settings -> Secrets and variables -> Actions to enable automatic deploys."
+          fi
+
+      - name: Deploy static site with Wrangler
+        if: steps.check_token.outputs.configured == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4"
+
+      - name: Smoke test live site
+        if: steps.check_token.outputs.configured == 'true'
+        run: |
+          curl -fsSL https://jasondavislab.dev/ | grep -q "Jason Davis"
+          curl -fsSL https://jasondavislab.dev/projects.json | node -e 'const d = JSON.parse(require("fs").readFileSync(0,"utf8")); if (!Array.isArray(d) || !d.length) process.exit(1);'

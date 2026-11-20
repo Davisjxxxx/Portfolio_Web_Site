@@ -1,0 +1,19 @@
+{
+  "name": "jasondavislab",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./portfolio",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  },
+  "routes": [
+    {
+      "pattern": "jasondavislab.dev",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.jasondavislab.dev",
+      "custom_domain": true
+    }
+  ]
+}
